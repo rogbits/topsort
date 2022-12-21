@@ -1,0 +1,44 @@
+top sort
+--------
+topological sort implementation using kahn's algo,
+wrapped in a single-call api, running on a golang server.
+
+bootstrapping
+-------------
+- docker compose build
+- docker compose up
+
+project components
+------------------
+- lib/api
+  interface request handlers
+- lib/graph
+  graph data structure
+- lib/logger
+  a basic wrapper around a logging component for future enhancements
+- lib/server
+  a basic http server
+- lib/set
+  set data structure
+- main.go
+  entrypoint into the service
+
+testing
+-------
+- _test.sh, to perform unit tests
+- _curl.sh, to perform functional tests based on fixtures/
+- _test_coverage.sh, coverage report
+- _test_bench.sh, simple api benchmark
+
+api
+---
+- GET /health
+  health check
+  returns 200 on success
+
+- POST /sort
+  takes a json array of edge pairs,
+  ex: [["a", "b"], ["b", "c"], ["c", "d"], ["d", "e"]]
+
+  returns sorted vertices in topological order,
+  ex: ["a", "b", "c", "d", "e"]

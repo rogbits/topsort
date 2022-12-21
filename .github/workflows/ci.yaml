@@ -1,0 +1,27 @@
+name: ci
+on: [push]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v3
+      - name: unit test
+        run: ./_test.sh
+  coverage:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v3
+      - name: coverage
+        run: ./_test_coverage.sh ci
+  bench:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v3
+      - name: benchmark
+        run: |
+          go run main.go &
+          sleep 1
+          ./_test_bench.sh
